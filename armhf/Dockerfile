@@ -109,15 +109,19 @@ ENV ARM_PACKAGES \
     libass-dev:armhf \
     libavformat-dev:armhf \
     libswscale-dev:armhf \
-    libpcap0.8-dev:armhf
-
+    libpcap0.8-dev:armhf \
+    libsdl2-dev:armhf \
+    libsdl2-image-dev:armhf
+    libsdl2-gfx-dev:armhf \
+    libzip-dev:armhf \
+    libsdl2-2.0-0 : armhf 
+    
 RUN set -eux; \
     dpkg --add-architecture armhf; \
     rm -rf /etc/apt/sources.list; \
-    echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports xenial main restricted universe multiverse" | tee -a /etc/apt/sources.list && \
-    echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports xenial-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list && \
-    echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports xenial-security main restricted universe multiverse"  | tee -a /etc/apt/sources.list && \
-    echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports xenial-backports main restricted universe multiverse"  | tee -a /etc/apt/sources.list && \
+    echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ xenial main multiverse restricted universe" | tee -a /etc/apt/sources.list && \
+    echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ xenial-updates main multiverse restricted universe" | tee -a /etc/apt/sources.list && \
+    echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ xenial-security main multiverse restricted universe" | tee -a /etc/apt/sources.list  
     apt-get update; \
     apt-get install -y $ARM_PACKAGES; \
     apt-get -y autoremove; \
@@ -131,8 +135,9 @@ ENV AR=/usr/bin/arm-linux-gnueabihf-gcc-ar
 ENV CXX=/usr/bin/arm-linux-gnueabihf-g++
 ENV PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig/
 ENV CXX11=/usr/bin/arm-linux-gnueabihf-g++
-ENV CXX17="/opt/x-tools/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++ -idirafter /usr/include -L/usr/lib/arm-linux-gnueabihf/"
+
 ENV CC17="/opt/x-tools/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc -idirafter /usr/include -L/usr/lib/arm-linux-gnueabihf/"
+ENV CXX17="/opt/x-tools/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++ -idirafter /usr/include -L/usr/lib/arm-linux-gnueabihf/"
 ENV AR17=/opt/x-tools/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc-ar
 ENV AS17=/opt/x-tools/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc-as
 
